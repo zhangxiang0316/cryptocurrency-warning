@@ -1,0 +1,32 @@
+{
+  "name": "price-monitor",
+  "version": "1.0.0",
+  "description": "加密货币监测",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "prod": "pm2 start index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "cryptocurrency",
+    "price",
+    "monitor",
+    "websocket",
+    "okx",
+    "bitcoin",
+    "ethereum"
+  ],
+  "author": "zx",
+  "license": "MIT",
+  "dependencies": {
+    "ws": "^8.14.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

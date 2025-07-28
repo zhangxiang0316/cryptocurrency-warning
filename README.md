@@ -102,19 +102,33 @@ npm run prod
 
 ```
 cryptocurrency-warning/
-├── index.js           # 主程序文件
-├── package.json       # 项目配置
-├── pnpm-lock.yaml    # 依赖锁定文件
-└── README.md         # 项目说明
+├── index.js                    # 主程序入口文件
+├── config.js                   # 配置文件
+├── services/
+│   ├── WebSocketService.js     # WebSocket连接服务
+│   ├── PriceMonitorService.js  # 价格监控服务
+│   └── NotificationService.js  # 通知服务
+├── utils/
+│   └── helpers.js              # 工具函数
+├── package.json                # 项目配置文件
+├── pnpm-lock.yaml             # 依赖锁定文件
+└── README.md                   # 项目说明文档
 ```
 
 ## 核心功能说明
+
+### 模块化架构
+- **WebSocketService**: 管理OKX WebSocket连接、心跳、重连机制
+- **PriceMonitorService**: 处理价格监控逻辑、阈值管理、价格变化检测
+- **NotificationService**: 处理微信告警、防重复机制、告警记录清理
+- **配置管理**: 集中化配置管理，支持环境变量覆盖
 
 ### 价格监控机制
 
 - 系统通过 WebSocket 连接到 OKX 交易所获取实时价格数据
 - 当价格超过设定的 `MAX_PRICE` 或低于 `MIN_PRICE` 时触发预警
 - 预警触发后，系统会自动调整阈值以适应新的价格水平
+- 详细的价格变化日志记录
 
 ### 预警防重复机制
 
@@ -127,6 +141,7 @@ cryptocurrency-warning/
 - WebSocket 连接断开时自动尝试重连
 - 最多重连 5 次，每次重连间隔递增
 - 重连成功后自动恢复所有币种的订阅
+- 优雅关闭和资源清理
 
 ## 环境要求
 

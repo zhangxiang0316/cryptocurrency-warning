@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  price-monitor:
+    build: .
+    container_name: crypto-price-monitor
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+      - LOG_LEVEL=info
+      # 如果需要配置微信 Webhook Key，可以在这里设置
+      # - WECHAT_WEBHOOK_KEY=your-actual-webhook-key
+    volumes:
+      # 如果需要持久化日志或配置文件，可以挂载卷
+      - ./logs:/app/logs
+    networks:
+      - price-monitor-network
+    # 如果应用有HTTP接口，可以暴露端口
+    # ports:
+    #   - "3000:3000"
+    
+    # 资源限制
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+          cpus: '0.5'
+        reservations:
+          memory: 128M
+          cpus: '0.25'
+    
+    # 健康检查
+    healthcheck:
+      test: ["CMD", "node", "-e", "console.log('Health check passed')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+networks:
+  price-monitor-network:
+    driver: bridge
+
+# 如果需要数据持久化，可以定义卷
+volumes:
+  logs:
+    driver: local

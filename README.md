@@ -44,10 +44,10 @@ pnpm install
 const CONFIG = {
     // WebSocket 连接地址
     OKX_WEBSOCKET_URL: 'wss://ws.okx.com:8443/ws/v5/public',
-    
+
     // 监控的币种列表
     DEFAULT_SYMBOLS: ['BTCUSDT', 'ETHUSDT', 'SOLUSDT', 'DOGEUSDT', 'OKBUSDT', 'BNBUSDT', 'APTUSDT'],
-    
+
     // 价格上限阈值
     MAX_PRICE: {
         SOLUSDT: 143,
@@ -55,7 +55,7 @@ const CONFIG = {
         BTCUSDT: 108000,
         // ... 其他币种
     },
-    
+
     // 价格下限阈值
     MIN_PRICE: {
         SOLUSDT: 143,
@@ -63,10 +63,10 @@ const CONFIG = {
         BTCUSDT: 108000,
         // ... 其他币种
     },
-    
+
     // 微信机器人 Webhook Key
     WECHAT_WEBHOOK_KEY: 'your-webhook-key-here',
-    
+
     // 价格变化预警阈值（1% = 0.01）
     PRICE_CHANGE_ALERT_THRESHOLD: 0.01
 };
@@ -118,6 +118,7 @@ cryptocurrency-warning/
 ## 核心功能说明
 
 ### 模块化架构
+
 - **WebSocketService**: 管理OKX WebSocket连接、心跳、重连机制
 - **PriceMonitorService**: 处理价格监控逻辑、阈值管理、价格变化检测
 - **NotificationService**: 处理微信告警、防重复机制、告警记录清理
